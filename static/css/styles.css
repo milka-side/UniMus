@@ -1,0 +1,252 @@
+:root {
+    --pink-light: #ffeef4;
+    --pink-soft: #ffd1e3;
+    --pink-main: #ff99cc;
+    --pink-dark: #ff80bf;
+    --pink-accent: #ff69b4;
+    --text-dark: #5a3a4e;
+    --text-light: #8a6075;
+    --white: #ffffff;
+    --shadow: rgba(255, 105, 180, 0.15);
+    --border: #ffd1e3;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #fff0f8 0%, #ffeef4 100%);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+        url('https://static.vecteezy.com/system/resources/previews/048/804/577/non_2x/cute-pastel-pink-bow-png.png'),
+        url('https://i.pinimg.com/474x/46/4b/6e/464b6ed0634ec302da5828ea2da44c9a.jpg'),
+        url('https://www.freeiconspng.com/thumbs/bow-png/cute-pink-bow-png-0.png'),
+        url('https://static.vecteezy.com/system/resources/previews/025/253/701/non_2x/cute-pastel-pink-heart-shape-icon-png.png'),
+        url('https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA0L3JtMTU5NmJhdGNoMi1lbGVtZW50LTAwMi5wbmc.png'),
+        url('https://pngimg.com/d/tulip_PNG8982.png'),
+        url('https://static.vecteezy.com/system/resources/thumbnails/055/244/308/small/pink-ballet-slippers-dance-shoes-satin-ribbon-pointe-shoes-elegant-footwear-graceful-dance-pre-free-png.png'),
+        url('http://www.clker.com/cliparts/g/p/S/B/r/h/wings-n-pink-heart-hi.png');
+    background-repeat: no-repeat;
+    background-position:
+        5% 10%, 90% 15%, 10% 80%, 85% 70%,
+        20% 50%, 75% 30%, 50% 85%, 95% 90%;
+    background-size: 120px, 100px, 80px, 90px, 150px, 100px, 130px, 110px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: -1;
+    animation: floatBackground 30s infinite linear;
+}
+
+h1 {
+    color: var(--pink-dark);
+    text-align: center;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(255, 105, 180, 0.2);
+}
+
+h2 {
+    color: var(--pink-main);
+    border-bottom: 2px solid var(--pink-soft);
+    padding-bottom: 8px;
+    margin-top: 40px;
+}
+
+h3 {
+    color: var(--pink-accent);
+    margin: 0;
+}
+
+a {
+    color: var(--pink-accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--pink-dark);
+    text-decoration: underline;
+}
+
+form {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px var(--shadow);
+    max-width: 650px;
+    width: 90%;
+    margin: 30px auto;
+    box-sizing: border-box;
+}
+
+label {
+    color: var(--pink-dark);
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 15px;
+    display: block;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="url"],
+textarea,
+select {
+    width: 100%;
+    padding: 14px 18px;
+    margin: 8px 0 18px 0;
+    border: 2px solid var(--pink-soft);
+    border-radius: 18px;
+    background: var(--pink-light);
+    font-size: 1em;
+    color: var(--text-dark);
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--pink-accent);
+    box-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
+    background: var(--white);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button,
+input[type="submit"] {
+    background: linear-gradient(to bottom, var(--pink-main), var(--pink-dark));
+    color: white;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px auto;
+    box-shadow: 0 6px 15px var(--shadow);
+    transition: all 0.3s ease;
+    display: block;
+    width: fit-content;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: linear-gradient(to bottom, var(--pink-dark), var(--pink-accent));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px var(--shadow);
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+}
+
+th {
+    background: var(--pink-soft);
+    color: var(--text-dark);
+    padding: 15px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+td {
+    background: var(--white);
+    padding: 15px;
+    box-shadow: 0 4px 10px var(--shadow);
+}
+
+tr td:first-child { border-radius: 15px 0 0 15px; }
+tr td:last-child { border-radius: 0 15px 15px 0; }
+
+.playlist-card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.playlist-card:hover {
+    transform: translateY(-5px);
+}
+
+.pagination {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 1.1em;
+}
+
+.pagination a, .pagination span {
+    background: var(--pink-soft);
+    padding: 10px 18px;
+    border-radius: 20px;
+    margin: 0 5px;
+    color: var(--text-dark);
+}
+
+.pagination a:hover {
+    background: var(--pink-main);
+    color: white;
+    text-decoration: none;
+}
+
+.main-logo {
+    height: 70px;
+    margin-right: 20px;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
+    animation: logo-glow 3s infinite alternate ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+.main-logo:hover {
+    transform: scale(1.1) rotate(-3deg);
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.9));
+}
+
+.logo-text-styled {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 3em;
+    color: var(--pink-dark);
+    text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.5);
+}
+
+@keyframes logo-glow {
+    0% {
+        filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.4));
+    }
+    100% {
+        filter: drop-shadow(0 0 18px rgba(255, 105, 180, 0.8)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+}
+
+@keyframes floatBackground {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2em; }
+    form { padding: 20px; width: 95%; }
+    th, td { padding: 10px; font-size: 0.9em; }
+}

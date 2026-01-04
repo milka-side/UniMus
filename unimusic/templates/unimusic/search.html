@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'images/logo.jpg' %}">
+</head>
+<body>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 30px 20px;">
+        <a href="{% url 'home' %}" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="{% static 'images/logo.jpg' %}"
+                alt="UniMusic Logo"
+                class="main-logo">
+
+            <span class="logo-text-styled">
+                UniMusic
+            </span>
+        </a>
+    </header>
+    <h1>Search Playlists and Songs 🔍</h1>
+
+    <form method="get" style="margin-bottom: 40px;">
+        <input type="text" name="q" value="{{ query }}" placeholder="Enter title, artist, album..."
+               style="width: 80%; max-width: 600px; padding: 18px; font-size: 1.3em; border-radius: 25px;">
+        <button type="submit" style="padding: 18px 40px; font-size: 1.3em;">Search</button>
+    </form>
+
+    <a href="{% url 'home' %}">← Back</a>
+
+    {% if query %}
+        <h2>Playlists found: {{ playlists.count }}</h2>
+        {% if playlists %}
+            {% for playlist in playlists %}
+                <div style="border: 2px solid #ffd1e3; padding: 20px; border-radius: 20px; margin-bottom: 20px; background: white;">
+                    <h3><a href="{% url 'view_playlist' playlist.pk %}">{{ playlist.name }}</a></h3>
+                    <p>{{ playlist.description|default:"No description" }}</p>
+                    <small>{{ playlist.songs.count }} songs</small>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No playlists found 😿</p>
+        {% endif %}
+
+        <h2>Songs found: {{ songs.count }}</h2>
+        {% if songs %}
+            <ul>
+            {% for song in songs %}
+                <li style="padding: 10px; background: var(--pink-light); margin: 10px 0; border-radius: 15px;">
+                    <strong>{{ song.title }}</strong> — {{ song.artist }}
+                    {% if song.album %} ({{ song.album }}) {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No songs found 😿</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

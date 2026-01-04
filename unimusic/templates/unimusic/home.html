@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Playlists</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'images/logo.jpg' %}">
+</head>
+<body>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 30px 20px;">
+        <a href="{% url 'home' %}" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="{% static 'images/logo.jpg' %}"
+                alt="UniMusic Logo"
+                class="main-logo">
+
+            <span class="logo-text-styled">
+                UniMusic
+            </span>
+        </a>
+    </header>
+    <h1>Welcome, {{ user.username }}! 💕</h1>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+
+    <div style="background: linear-gradient(to right, var(--pink-light), var(--pink-soft)); padding: 30px; border-radius: 30px; text-align: center; margin-bottom: 40px; box-shadow: 0 10px 30px var(--shadow);">
+        <h2>Your Music Stats 🎶</h2>
+        <p style="font-size: 1.5em; margin: 15px;">
+            <strong>{{ total_playlists }}</strong> playlists •
+            <strong>{{ total_songs }}</strong> songs
+        </p>
+        <p style="font-size: 1.4em; color: var(--pink-dark);">
+            Favorite Artist: <strong>{{ favorite_artist }}</strong> 💖
+        </p>
+    </div>
+    <h2>
+        <a href="{% url 'add_song' %}">Add Song</a> |
+        <a href="{% url 'song_list' %}">My Songs</a> |
+        <a href="{% url 'create_playlist' %}">Create Playlist</a> |
+        <a href="{% url 'search' %}">Search</a>
+    </h2>
+
+    <h2>My Playlists</h2>
+    {% for playlist in page_obj %}
+        <div style="border: 2px solid #ffd1e3; padding: 20px; border-radius: 20px; margin-bottom: 20px; background: white;">
+            <h3><a href="{% url 'view_playlist' playlist.pk %}">{{ playlist.name }}</a></h3>
+            <p>{{ playlist.description|default:"No description" }}</p>
+            <p><small>{{ playlist.songs.count }} songs • Created: {{ playlist.created_at|date:"d.m.Y" }}</small></p>
+            <a href="{% url 'edit_playlist' playlist.pk %}">Edit</a> |
+            <a href="{% url 'delete_playlist' playlist.pk %}" onclick="return confirm('Delete this playlist?')">Delete</a>
+        </div>
+    {% empty %}
+        <p>You don't have any playlists yet. <a href="{% url 'create_playlist' %}">Create your first one!</a> 💖</p>
+    {% endfor %}
+
+    <div style="text-align: center; margin-top: 40px;">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">← Previous</a>
+        {% endif %}
+
+        <span style="margin: 0 15px; padding: 8px 15px; background: var(--pink-light); border-radius: 10px;">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next →</a>
+        {% endif %}
+    </div>
+</body>
+</html>

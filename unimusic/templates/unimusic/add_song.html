@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Song</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'images/logo.jpg' %}">
+</head>
+<body>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 30px 20px;">
+        <a href="{% url 'home' %}" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="{% static 'images/logo.jpg' %}"
+                alt="UniMusic Logo"
+                class="main-logo">
+
+            <span class="logo-text-styled">
+                UniMusic
+            </span>
+        </a>
+    </header>
+    <h1>Add a song with a link 🎵</h1>
+    <p style="font-size: 1.2em; color: var(--pink-dark);">
+        Paste a link from YouTube, Spotify, or SoundCloud — and the song will be added! 💕
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Song</button>
+    </form>
+
+    <a href="{% url 'home' %}">← Back</a>
+</body>
+</html>

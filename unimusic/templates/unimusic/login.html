@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'images/logo.jpg' %}">
+</head>
+<body>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 30px 20px;">
+        <a href="{% url 'home' %}" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="{% static 'images/logo.jpg' %}"
+                alt="UniMusic Logo"
+                class="main-logo">
+
+            <span class="logo-text-styled">
+                UniMusic
+            </span>
+        </a>
+    </header>
+    <h1>Log In</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log in</button>
+    </form>
+    <a href="{% url 'register' %}">Don't have an account? Sign up</a>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ playlist.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/jpg" href="{% static 'images/logo.jpg' %}">
+</head>
+<body>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 30px 20px;">
+        <a href="{% url 'home' %}" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="{% static 'images/logo.jpg' %}"
+                alt="UniMusic Logo"
+                class="main-logo">
+
+            <span class="logo-text-styled">
+                UniMusic
+            </span>
+        </a>
+    </header>
+    <h1>{{ playlist.name }}</h1>
+    <p>{{ playlist.description|default:"No description" }}</p>
+
+    <div style="margin-bottom: 20px;">
+        <small>Created: {{ playlist.created_at|date:"d.m.Y" }} | Status:
+            {% if playlist.is_public %} 🌍 Public {% else %} 🔒 Private {% endif %}
+        </small>
+    </div>
+
+    {% if is_owner %}
+        <div style="margin-bottom: 20px; padding: 15px; background: #fdfdfd; border-radius: 15px; border: 1px solid #eee;">
+            <a href="{% url 'edit_playlist' playlist.pk %}">Edit</a> |
+            <a href="{% url 'delete_playlist' playlist.pk %}" onclick="return confirm('Delete?')">Delete</a>
+
+            {% if playlist.is_public %}
+                <button id="copy-link-btn" style="margin-left: 20px; background: #ff85a1; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">
+                    Copy Share Link 🔗
+                </button>
+                <span id="copy-status" style="display: none; color: #ff0050; font-size: 0.9em; margin-left: 10px;">Copied! 💖</span>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <h2>Songs in Playlist</h2>
+    <div class="songs-list">
+        {% for song in playlist.songs.all %}
+            <div class="song-item" style="margin-bottom: 15px; padding: 15px; border-bottom: 1px solid #ffe4ed; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong>{{ song.title }}</strong> — {{ song.artist }}
+                </div>
+                {% if song.link %}
+                    <a href="{{ song.link }}" target="_blank" class="btn-play" style="background: #ff0050; color: white; padding: 8px 15px; text-decoration: none; border-radius: 20px;">
+                        Listen 🎵
+                    </a>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No songs here yet.</p>
+        {% endfor %}
+    </div>
+
+    <br>
+    <a href="{% url 'home' %}">← Back</a>
+
+    <script>
+        const btn = document.getElementById('copy-link-btn');
+        if (btn) {
+            btn.addEventListener('click', function() {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    const status = document.getElementById('copy-status');
+                    status.style.display = 'inline';
+                    setTimeout(() => { status.style.display = 'none'; }, 2000);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
