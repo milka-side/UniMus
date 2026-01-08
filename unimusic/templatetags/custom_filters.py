@@ -1,3 +1,7 @@
+"""
+Django custom filters for UniMus project.
+"""
+
 from django import template
 from django.template.defaultfilters import stringfilter
 
